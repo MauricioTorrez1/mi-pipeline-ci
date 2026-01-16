@@ -10,7 +10,7 @@ def calcular_interes_compuesto (capital, interes, años):
     :param interes: porcentaje de interes
     :param años: años de inversión
     """
-    monto_final = (capital * (1 + interes / 100) ** años) + 1000 
+    monto_final = capital * (1 + interes / 100) ** años
     
     # Salida de la función (def)
     return round(monto_final, 2)
