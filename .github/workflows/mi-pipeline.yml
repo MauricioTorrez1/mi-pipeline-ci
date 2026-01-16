@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Descargar Código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       
       - name: Instalar Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.9'
+          python-version: '3.13'
           
       - name: Correr Tests
         run: python -m unittest test_calculadora.py
@@ -29,7 +29,7 @@ jobs:
     
     steps:
       - name: Descargar Código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Simular Despliegue a Producción
         run: |
