@@ -10,14 +10,14 @@ jobs:
 
         steps: 
             # Paso A: Descargar tu código del repositorio a la máquina Linux
-           - name: Descargar Código (Checkout)
-            uses: actions/checkout@v6
+         - name: Descargar Código (Checkout)
+           uses: actions/checkout@v6
 
             # Paso B: Instalar Python en la VM
-           - name: Instalar Python
-            uses: actions/setup-python@v6
-            with:
+         - name: Instalar Python
+           uses: actions/setup-python@v6
+           with:
                 python-version: '3.13'
             # Paso C: Ejecutar las pruebas unitarias
-           - name: Correr tests
-            run: python -m unittest test_calculadora.py
+         - name: Correr tests
+           run: python -m unittest test_calculadora.py
