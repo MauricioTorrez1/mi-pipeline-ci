@@ -1,23 +1,39 @@
-name: Probador Automatico de Finanzas
+name: Pipeline Completa CI/CD
 
-# 1.  on: ¿Cuándo se activa?
-# Cada vez que subas código (git push)
 on: push
-# 2. jobs: ¿Qué va a hacer?
+
 jobs:
-    build-and-test:
-        runs-on: ubuntu-latest #Usar una VM con Linux en su ultima version estable
+  # --- ETAPA 1: INTEGRACIÓN CONTINUA (CI) ---
+  
+  ci-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar Código
+        uses: actions/checkout@v4
+      
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+          
+      - name: Correr Tests
+        run: python -m unittest test_calculadora.py
 
-        steps: 
-            # Paso A: Descargar tu código del repositorio a la máquina Linux
-         - name: Descargar Código (Checkout)
-           uses: actions/checkout@v6
+  # --- ETAPA 2: DESPLIEGUE CONTINUO (CD) ---
+  
+  cd-deploy:
+    runs-on: ubuntu-latest
+    # 
+    # "needs" : "No arranques hasta que 'ci-test' termine con éxito"
+    needs: ci-test
+    
+    steps:
+      - name: Descargar Código
+        uses: actions/checkout@v4
 
-            # Paso B: Instalar Python en la VM
-         - name: Instalar Python
-           uses: actions/setup-python@v6
-           with:
-                python-version: '3.13'
-            # Paso C: Ejecutar las pruebas unitarias
-         - name: Correr tests
-           run: python -m unittest test_calculadora.py
+      - name: Simular Despliegue a Producción
+        run: |
+          echo "🚧 Iniciando protocolo de despliegue..."
+          echo "Conectando con el servidor (Simulado)..."
+          echo "Copiando archivos..."
+          echo "✅ ¡Despliegue exitoso! La app ya está online."
