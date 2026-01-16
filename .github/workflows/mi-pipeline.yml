@@ -1,0 +1,23 @@
+name: Probador Automatico de Finanzas
+
+# 1.  on: ¿Cuándo se activa?
+# Cada vez que subas código (git push)
+on: push
+# 2. jobs: ¿Qué va a hacer?
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest #Usar una VM con Linux en su ultima version estable
+
+        steps: 
+            # Paso A: Descargar tu código del repositorio a la máquina Linux
+           - name: Descargar Código (Checkout)
+            uses: actions/checkout@v6
+
+            # Paso B: Instalar Python en la VM
+           - name: Instalar Python
+            uses: actions/setup-python@v6
+            with:
+                python-version: '3.13'
+            # Paso C: Ejecutar las pruebas unitarias
+           - name: Correr tests
+            run: python -m unittest test_calculadora.py
